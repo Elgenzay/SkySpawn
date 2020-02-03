@@ -1,0 +1,7 @@
+name: SkySpawn
+version: 1.0
+main: net.elgenzay.minecraft.skyspawn.SkySpawn
+api-version: 1.13
+authors: [Elgenzay]
+description: Spawns players randomly in a predefined area around origin
+website: https://elgenzay.net
