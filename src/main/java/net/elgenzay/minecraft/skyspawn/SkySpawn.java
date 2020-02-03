@@ -57,9 +57,8 @@ public final class SkySpawn extends JavaPlugin implements Listener {
     private Location createSpawnLocation(World world){
         int tries = 0;
         Location respawnLocation;
-        World respawnWorld = world;
         do {
-            respawnLocation = rollLocation(respawnWorld);
+            respawnLocation = rollLocation(world);
             tries++;
         } while (respawnLocation.getBlock().getBiome().name().contains("OCEAN") && tries < maxTriesForLand);
         return respawnLocation;
@@ -70,15 +69,11 @@ public final class SkySpawn extends JavaPlugin implements Listener {
         double r = radius * Math.sqrt(Math.random());
         double x = r * Math.cos(a);
         double z = r * Math.sin(a);
-        Location randomLocation = new Location(world, x, 256, z);
-        return randomLocation;
+        return new Location(world, x, 256, z);
     }
 
     private void giveSlowFall(Player player, int duration){
-        Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
-            public void run() {
-                player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING, duration, 0));
-            }
-        }, 10L);
+        Bukkit.getScheduler().scheduleSyncDelayedTask(this,
+                () -> player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING, duration, 0)), 1);
     }
 }
