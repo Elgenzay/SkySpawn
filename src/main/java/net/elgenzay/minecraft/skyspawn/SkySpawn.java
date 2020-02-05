@@ -23,6 +23,7 @@ public final class SkySpawn extends JavaPlugin implements Listener {
     public void onEnable() {
         config.addDefault("radius", radius);
         config.addDefault("maxTriesForLand", maxTriesForLand);
+        config.addDefault("slowFallTime", 20*30);
         config.options().copyDefaults(true);
         saveConfig();
         radius = config.getDouble("radius");
@@ -39,7 +40,7 @@ public final class SkySpawn extends JavaPlugin implements Listener {
             Location respawnLocation = createSpawnLocation(respawnWorld);
 
             event.setRespawnLocation(respawnLocation);
-            giveSlowFall(player, 400);
+            giveSlowFall(player, config.getInt("slowFallTime"));
         }
     }
 
@@ -50,7 +51,7 @@ public final class SkySpawn extends JavaPlugin implements Listener {
             Location spawnLocation = createSpawnLocation(player.getWorld());
 
             player.teleport(spawnLocation);
-            giveSlowFall(player,500);
+            giveSlowFall(player, config.getInt("slowFallTime"));
         }
     }
 
